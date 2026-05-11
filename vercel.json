@@ -1,8 +1,13 @@
 {
-	"rewrites": [
+	"functions": {
+		"nodejs/server.js": {
+			"runtime": "nodejs20.x"
+		}
+	},
+	"routes": [
 		{
-			"source": "/",
-			"destination": "/static/index.html"
+			"src": "/(.*)",
+			"dest": "/nodejs/server.js"
 		}
 	]
 }
