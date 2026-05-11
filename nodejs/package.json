@@ -1,0 +1,16 @@
+{
+  "name": "surakarta-weather-card",
+  "version": "1.0.0",
+  "description": "Simple Node.js app showing today's date and Surakarta weather",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
