@@ -74,6 +74,15 @@
         font-size: 12px;
         color: rgba(245, 247, 251, 0.7);
       }
+
+      .uptime {
+        position: fixed;
+        left: 16px;
+        bottom: 16px;
+        font-size: 12px;
+        color: rgba(245, 247, 251, 0.7);
+        z-index: 1;
+      }
     </style>
   </head>
   <body>
@@ -84,10 +93,13 @@
       <div class="desc" id="desc">Loading weather...</div>
     </div>
 
+    <div class="uptime" id="uptime">Uptime: --</div>
+
     <script>
       const dateEl = document.getElementById("date");
       const tempEl = document.getElementById("temp");
       const descEl = document.getElementById("desc");
+      const uptimeEl = document.getElementById("uptime");
 
       async function loadStatus() {
         const response = await fetch("/api/status");
@@ -109,6 +121,23 @@
         .catch(() => {
           dateEl.textContent = "Today is ...";
           descEl.textContent = "Failed to load weather";
+        });
+
+      fetch("/api/uptime")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Uptime API error");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          const seconds = Number(data.uptimeSeconds);
+          uptimeEl.textContent = Number.isFinite(seconds)
+            ? `Uptime: ${seconds}s`
+            : "Uptime: --";
+        })
+        .catch(() => {
+          uptimeEl.textContent = "Uptime: --";
         });
     </script>
   </body>

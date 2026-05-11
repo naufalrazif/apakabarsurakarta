@@ -96,4 +96,10 @@ app.get("/api/status", async (req, res) => {
   }
 });
 
+app.get("/api/uptime", (req, res) => {
+  res.json({
+    uptimeSeconds: Math.floor(process.uptime())
+  });
+});
+
 module.exports = app;
