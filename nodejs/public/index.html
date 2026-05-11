@@ -123,22 +123,27 @@
           descEl.textContent = "Failed to load weather";
         });
 
-      fetch("/api/uptime")
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Uptime API error");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          const seconds = Number(data.uptimeSeconds);
-          uptimeEl.textContent = Number.isFinite(seconds)
-            ? `Uptime: ${seconds}s`
-            : "Uptime: --";
-        })
-        .catch(() => {
-          uptimeEl.textContent = "Uptime: --";
-        });
+      function loadUptime() {
+        fetch("/api/uptime")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Uptime API error");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            const seconds = Number(data.uptimeSeconds);
+            uptimeEl.textContent = Number.isFinite(seconds)
+              ? `Uptime: ${seconds}s`
+              : "Uptime: --";
+          })
+          .catch(() => {
+            uptimeEl.textContent = "Uptime: --";
+          });
+      }
+
+      loadUptime();
+      setInterval(loadUptime, 10000);
     </script>
   </body>
 </html>
