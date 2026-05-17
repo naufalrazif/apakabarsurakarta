@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const serverless = require("serverless-http");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -102,4 +103,4 @@ app.get("/api/uptime", (req, res) => {
   });
 });
 
-module.exports = app;
+module.exports.handler = serverless(app);
