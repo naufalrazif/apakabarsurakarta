@@ -1,7 +1,3 @@
 [build]
-	publish = "."
-
-[[redirects]]
-	from = "/"
-	to = "/static/index.html"
-	status = 200
+	base = "nodejs"
+	publish = "public"
